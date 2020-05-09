@@ -1,0 +1,40 @@
+class Solution {
+    public int[] sortedSquares(int[] A) {
+        int length = A.length;
+        int positiveIndex = 0;
+        int negativeIndex ;
+        
+        while(positiveIndex<length&&A[positiveIndex]<0)
+            positiveIndex++;
+        
+        negativeIndex = positiveIndex-1;
+        int[] results = new int[length];
+        int t=0;
+        
+        while(positiveIndex<length&&negativeIndex>=0){
+            if(A[positiveIndex]*A[positiveIndex]>
+              A[negativeIndex]*A[negativeIndex]){
+                results[t]=A[negativeIndex]*A[negativeIndex];
+                negativeIndex--;
+            }else{
+                results[t]=A[positiveIndex]*A[positiveIndex];
+                positiveIndex++;
+            }
+            t++;
+        }
+        
+        while(positiveIndex<length){
+            results[t] = A[positiveIndex]*A[positiveIndex];
+            positiveIndex++;
+            t++;
+        }
+        
+        while(negativeIndex>=0){
+            results[t] = A[negativeIndex]*A[negativeIndex];
+            negativeIndex--;
+            t++;
+        }
+        
+        return results;
+    }
+}
